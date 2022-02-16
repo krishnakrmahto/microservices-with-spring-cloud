@@ -1,6 +1,10 @@
-paypw_payment_id,transaction_id,processor_transaction_id,processor,created_at
-gaypw_payment_id,transaction_id,processor_transaction_id,processor,created_at
-TS ###
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
 .apt_generated
 .classpath
 .factorypath
@@ -27,4 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
