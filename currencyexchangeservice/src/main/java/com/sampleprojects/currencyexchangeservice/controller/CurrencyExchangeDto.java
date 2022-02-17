@@ -2,15 +2,16 @@ package com.sampleprojects.currencyexchangeservice.controller;
 
 import java.math.BigDecimal;
 import lombok.Builder;
+import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
 @Value
 @Builder
+@RequiredArgsConstructor
 public class CurrencyExchangeDto {
 
-  Long id;
-  String from;
-  String to;
+  String fromCurrency;
+  String toCurrency;
   BigDecimal conversionMultiple;
 
 }
