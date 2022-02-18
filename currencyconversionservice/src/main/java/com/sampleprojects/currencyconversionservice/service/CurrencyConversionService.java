@@ -1,18 +1,31 @@
 package com.sampleprojects.currencyconversionservice.service;
 
-import com.sampleprojects.currencyconversionservice.controller.dto.CurrencyConversionDto;
+import com.sampleprojects.currencyconversionservice.api.client.response.CurrencyExchangeResponse;
+import com.sampleprojects.currencyconversionservice.api.client.rest.CurrencyExchangeClient;
+import com.sampleprojects.currencyconversionservice.api.controller.response.CurrencyConversionResponse;
 import java.math.BigDecimal;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class CurrencyConversionService {
 
-  public Optional<CurrencyConversionDto> getCurrencyConversion(String from, String to, BigDecimal fromAmount) {
-    return Optional.of(CurrencyConversionDto.builder()
-            .from(from)
-            .to(to)
-            .conversionMultiple(BigDecimal.TEN)
-            .fromAmount(fromAmount).build());
+  private final CurrencyExchangeClient currencyExchangeClient;
+
+  public Optional<CurrencyConversionResponse> getCurrencyConversion(String from, String to, BigDecimal fromAmount) {
+
+    CurrencyExchangeResponse currencyExchange = currencyExchangeClient.getCurrencyExchange(from, to);
+
+    BigDecimal conversionMultiple = currencyExchange.getConversionMultiple();
+
+    return Optional.of(CurrencyConversionResponse.builder()
+            .from(currencyExchange.getFromCurrency())
+            .to(currencyExchange.getToCurrency())
+            .conversionMultiple(conversionMultiple)
+            .fromAmount(fromAmount)
+            .toAmount(fromAmount.multiply(conversionMultiple))
+        .build());
   }
 }

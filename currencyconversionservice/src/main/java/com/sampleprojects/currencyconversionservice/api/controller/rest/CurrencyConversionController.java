@@ -1,7 +1,7 @@
-package com.sampleprojects.currencyconversionservice.controller.rest;
+package com.sampleprojects.currencyconversionservice.api.controller.rest;
 
-import com.sampleprojects.currencyconversionservice.controller.dto.CurrencyConversionDto;
-import com.sampleprojects.currencyconversionservice.controller.exception.CurrencyConversionNotFound;
+import com.sampleprojects.currencyconversionservice.api.controller.exception.CurrencyConversionNotFound;
+import com.sampleprojects.currencyconversionservice.api.controller.response.CurrencyConversionResponse;
 import com.sampleprojects.currencyconversionservice.service.CurrencyConversionService;
 import java.math.BigDecimal;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class CurrencyConversionController {
   private final CurrencyConversionService service;
 
   @GetMapping
-  public CurrencyConversionDto getCurrencyConversion(@RequestParam String from, @RequestParam String to,
+  public CurrencyConversionResponse getCurrencyConversion(@RequestParam String from, @RequestParam String to,
       @RequestParam BigDecimal fromAmount) {
 
     return service.getCurrencyConversion(from, to, fromAmount)

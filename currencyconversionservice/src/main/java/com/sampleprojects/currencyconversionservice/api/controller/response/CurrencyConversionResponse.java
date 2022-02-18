@@ -1,4 +1,4 @@
-package com.sampleprojects.currencyconversionservice.controller.dto;
+package com.sampleprojects.currencyconversionservice.api.controller.response;
 
 import java.math.BigDecimal;
 import lombok.Builder;
@@ -6,7 +6,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class CurrencyConversionDto {
+public class CurrencyConversionResponse {
   String from;
   String to;
   BigDecimal conversionMultiple;
