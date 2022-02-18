@@ -1,7 +1,7 @@
-package com.sampleprojects.currencyexchangeservice.controller.rest;
+package com.sampleprojects.currencyexchangeservice.api.server.rest;
 
-import com.sampleprojects.currencyexchangeservice.controller.CurrencyExchangeDto;
-import com.sampleprojects.currencyexchangeservice.controller.exception.CurrencyExchangeNotFoundException;
+import com.sampleprojects.currencyexchangeservice.api.server.exception.CurrencyExchangeNotFoundException;
+import com.sampleprojects.currencyexchangeservice.api.server.response.CurrencyExchangeResponse;
 import com.sampleprojects.currencyexchangeservice.service.CurrencyExchangeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ public class CurrencyExchangeController {
   private final CurrencyExchangeService service;
 
   @GetMapping
-  public CurrencyExchangeDto getFromToCurrencyExchange(@RequestParam String from, @RequestParam String to) {
+  public CurrencyExchangeResponse getFromToCurrencyExchange(@RequestParam String from, @RequestParam String to) {
 
     return service.getFromToCurrencyExchange(from, to)
         .orElseThrow(() -> new CurrencyExchangeNotFoundException(

@@ -1,4 +1,4 @@
-package com.sampleprojects.currencyexchangeservice.controller;
+package com.sampleprojects.currencyexchangeservice.api.server.response;
 
 import java.math.BigDecimal;
 import lombok.Builder;
@@ -8,7 +8,7 @@ import lombok.Value;
 @Value
 @Builder
 @RequiredArgsConstructor
-public class CurrencyExchangeDto {
+public class CurrencyExchangeResponse {
 
   String fromCurrency;
   String toCurrency;

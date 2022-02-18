@@ -1,4 +1,4 @@
-package com.sampleprojects.currencyexchangeservice.controller.exception;
+package com.sampleprojects.currencyexchangeservice.api.server.exception;
 
 public class CurrencyExchangeNotFoundException extends RuntimeException {
 
