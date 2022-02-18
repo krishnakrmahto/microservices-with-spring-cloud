@@ -2,7 +2,7 @@ package com.sampleprojects.currencyconversionservice.service;
 
 import com.sampleprojects.currencyconversionservice.api.client.response.CurrencyExchangeResponse;
 import com.sampleprojects.currencyconversionservice.api.client.rest.CurrencyExchangeClient;
-import com.sampleprojects.currencyconversionservice.api.controller.response.CurrencyConversionResponse;
+import com.sampleprojects.currencyconversionservice.api.server.response.CurrencyConversionResponse;
 import java.math.BigDecimal;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.sampleprojects.currencyconversionservice.api.controller.response;
+package com.sampleprojects.currencyconversionservice.api.server.response;
 
 import java.math.BigDecimal;
 import lombok.Builder;

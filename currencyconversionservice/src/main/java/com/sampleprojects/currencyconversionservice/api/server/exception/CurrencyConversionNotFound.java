@@ -1,4 +1,4 @@
-package com.sampleprojects.currencyconversionservice.api.controller.exception;
+package com.sampleprojects.currencyconversionservice.api.server.exception;
 
 public class CurrencyConversionNotFound extends RuntimeException{
 

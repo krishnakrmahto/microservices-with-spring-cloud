@@ -1,7 +1,7 @@
-package com.sampleprojects.currencyconversionservice.api.controller.rest;
+package com.sampleprojects.currencyconversionservice.api.server.rest;
 
-import com.sampleprojects.currencyconversionservice.api.controller.exception.CurrencyConversionNotFound;
-import com.sampleprojects.currencyconversionservice.api.controller.response.CurrencyConversionResponse;
+import com.sampleprojects.currencyconversionservice.api.server.exception.CurrencyConversionNotFound;
+import com.sampleprojects.currencyconversionservice.api.server.response.CurrencyConversionResponse;
 import com.sampleprojects.currencyconversionservice.service.CurrencyConversionService;
 import java.math.BigDecimal;
 import lombok.RequiredArgsConstructor;
