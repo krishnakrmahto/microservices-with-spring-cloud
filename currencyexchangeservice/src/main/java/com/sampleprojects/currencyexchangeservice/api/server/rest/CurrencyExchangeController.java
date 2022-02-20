@@ -4,6 +4,7 @@ import com.sampleprojects.currencyexchangeservice.api.server.exception.CurrencyE
 import com.sampleprojects.currencyexchangeservice.api.server.response.CurrencyExchangeResponse;
 import com.sampleprojects.currencyexchangeservice.service.CurrencyExchangeService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +20,8 @@ public class CurrencyExchangeController {
   private final CurrencyExchangeService service;
 
   @GetMapping
-//  @Retry(name = "currency-exchange", fallbackMethod = "defaultRetryFallbackEndpoint")
-  @CircuitBreaker(name = "currency-exchange", fallbackMethod = "defaultRetryFallbackEndpoint")
+  @CircuitBreaker(name = "currency-exchange", fallbackMethod = "circuitBreakerFallbackEndpoint")
+  @Retry(name = "currency-exchange", fallbackMethod = "retryFallbackEndpoint")
   public CurrencyExchangeResponse getFromToCurrencyExchange(@RequestParam String from, @RequestParam String to) {
 
     System.out.println("LocalDateTime.now() " + LocalDateTime.now());
@@ -29,10 +30,18 @@ public class CurrencyExchangeController {
             String.format("Currency exchange for from: %s, to: %s was not found", from, to)));
   }
 
-  private CurrencyExchangeResponse defaultRetryFallbackEndpoint(String from, String to, Exception e) {
-    System.out.println("Fallback LOL");
+  private CurrencyExchangeResponse retryFallbackEndpoint(String from, String to, Exception e) {
+    System.out.println("Retry Fallback");
     return CurrencyExchangeResponse.builder()
-        .fromCurrency(from)
+        .fromCurrency("Dummy Retry currency")
+        .toCurrency(to)
+        .build();
+  }
+
+  private CurrencyExchangeResponse circuitBreakerFallbackEndpoint(String from, String to, Exception e) {
+    System.out.println("CircuitBreaker Fallback");
+    return CurrencyExchangeResponse.builder()
+        .fromCurrency("Dummy CircuitBreaker currency")
         .toCurrency(to)
         .build();
   }
