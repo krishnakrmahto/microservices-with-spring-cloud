@@ -3,6 +3,7 @@ package com.sampleprojects.currencyexchangeservice.api.server.rest;
 import com.sampleprojects.currencyexchangeservice.api.server.exception.CurrencyExchangeNotFoundException;
 import com.sampleprojects.currencyexchangeservice.api.server.response.CurrencyExchangeResponse;
 import com.sampleprojects.currencyexchangeservice.service.CurrencyExchangeService;
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -21,6 +22,7 @@ public class CurrencyExchangeController {
 
   @GetMapping
   @RateLimiter(name = "currency-exchange-get", fallbackMethod = "rateLimiterFallback")
+  @Bulkhead(name = "currency-exchange-get", fallbackMethod = "bulkHeadFallback")
   public CurrencyExchangeResponse getFromToCurrencyExchange(@RequestParam String from, @RequestParam String to) {
 
     System.out.println("LocalDateTime.now() " + LocalDateTime.now());
@@ -35,6 +37,15 @@ public class CurrencyExchangeController {
     return CurrencyExchangeResponse.builder()
         .conversionMultiple(BigDecimal.TEN)
         .toCurrency("rateLimiterFallback..")
+        .build();
+  }
+
+  private CurrencyExchangeResponse bulkHeadFallback(String from, String to, Exception e) {
+    System.out.println("BulkHead fallback...");
+//    throw new CurrencyExchangeServerException("The currency exchange server seems to be temporarily unable to process new requests");
+    return CurrencyExchangeResponse.builder()
+        .conversionMultiple(BigDecimal.TEN)
+        .toCurrency("bulkHeadFallback..")
         .build();
   }
 }
