@@ -6,8 +6,8 @@ import com.sampleprojects.currencyexchangeservice.service.CurrencyExchangeServic
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/currency-exchange")
 @RequiredArgsConstructor
+@Slf4j
 public class CurrencyExchangeController {
 
   private final CurrencyExchangeService service;
@@ -25,7 +26,7 @@ public class CurrencyExchangeController {
   @Bulkhead(name = "currency-exchange-get", fallbackMethod = "bulkHeadFallback")
   public CurrencyExchangeResponse getFromToCurrencyExchange(@RequestParam String from, @RequestParam String to) {
 
-    System.out.println("LocalDateTime.now() " + LocalDateTime.now());
+    log.info("Sample log to see if sleuth attaches ID for this request when a log is done.");
     return service.getFromToCurrencyExchange(from, to)
         .orElseThrow(() -> new CurrencyExchangeNotFoundException(
             String.format("Currency exchange for from: %s, to: %s was not found", from, to)));
