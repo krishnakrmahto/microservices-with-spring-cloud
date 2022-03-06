@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  currency-exchnage:
+  currency-exchange:
     image: krishnakrmahto97/sampleprojects/currencyexchangeservice:0.0.1-SNAPSHOT
     mem_limit: 700m
     ports:
@@ -10,9 +10,13 @@ services:
       - currency-network
     depends_on:
       - eureka-discovery
+      - rabbitmq
     environment:
       - eureka.client.service-url.defaultZone=http://eureka-discovery:8761/eureka
       - spring.zipkin.baseUrl=http://zipkin-server:9411
+      - rabbit.uri=amqp://guest:guest@rabbitmq:5672
+      - spring.rabbitmq.host=rabbitmq
+      - spring.zipkin.sender.type=rabbit
 
   currency-conversion:
     image: krishnakrmahto97/sampleprojects/currencyconversionservice:0.0.1-SNAPSHOT
@@ -23,9 +27,13 @@ services:
       - currency-network
     depends_on:
       - eureka-discovery
+      - rabbitmq
     environment:
       - eureka.client.service-url.defaultZone=http://eureka-discovery:8761/eureka
       - spring.zipkin.baseUrl=http://zipkin-server:9411
+      - rabbit.uri=amqp://guest:guest@rabbitmq:5672
+      - spring.rabbitmq.host=rabbitmq
+      - spring.zipkin.sender.type=rabbit
 
   api-gateway:
     image: krishnakrmahto97/sampleprojects/springcloudapigateway:0.0.1-SNAPSHOT
@@ -36,19 +44,37 @@ services:
       - currency-network
     depends_on:
       - eureka-discovery
+      - rabbitmq
     environment:
       - eureka.client.service-url.defaultZone=http://eureka-discovery:8761/eureka
       - spring.zipkin.baseUrl=http://zipkin-server:9411
+      - rabbit.uri=amqp://guest:guest@rabbitmq:5672
+      - spring.rabbitmq.host=rabbitmq
+      - spring.zipkin.sender.type=rabbit
+
+  rabbitmq:
+    image: rabbitmq:3.9.13-management
+    mem_limit: 300m
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - currency-network
+    depends_on:
+      - eureka-discovery
 
   zipkin-server:
     image: openzipkin/zipkin:2.23
-    mem_limit: 700m
+    mem_limit: 300m
     ports:
       - "9411:9411"
     networks:
       - currency-network
     depends_on:
       - eureka-discovery
+      - rabbitmq
+    environment:
+      - rabbit.uri=amqp://guest:guest@rabbitmq:5672
 
   eureka-discovery:
     image: krishnakrmahto97/sampleprojects/eurekadiscoveryserver:0.0.1-SNAPSHOT
