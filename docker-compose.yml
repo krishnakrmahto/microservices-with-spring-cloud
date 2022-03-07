@@ -12,11 +12,11 @@ services:
       - eureka-discovery
       - rabbitmq
     environment:
-      - eureka.client.service-url.defaultZone=http://eureka-discovery:8761/eureka
-      - spring.zipkin.baseUrl=http://zipkin-server:9411
-      - rabbit.uri=amqp://guest:guest@rabbitmq:5672
-      - spring.rabbitmq.host=rabbitmq
-      - spring.zipkin.sender.type=rabbit
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://eureka-discovery:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
 
   currency-conversion:
     image: krishnakrmahto97/sampleprojects/currencyconversionservice:0.0.1-SNAPSHOT
@@ -29,11 +29,12 @@ services:
       - eureka-discovery
       - rabbitmq
     environment:
-      - eureka.client.service-url.defaultZone=http://eureka-discovery:8761/eureka
-      - spring.zipkin.baseUrl=http://zipkin-server:9411
-      - rabbit.uri=amqp://guest:guest@rabbitmq:5672
-      - spring.rabbitmq.host=rabbitmq
-      - spring.zipkin.sender.type=rabbit
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://eureka-discovery:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+
 
   api-gateway:
     image: krishnakrmahto97/sampleprojects/springcloudapigateway:0.0.1-SNAPSHOT
@@ -46,11 +47,11 @@ services:
       - eureka-discovery
       - rabbitmq
     environment:
-      - eureka.client.service-url.defaultZone=http://eureka-discovery:8761/eureka
-      - spring.zipkin.baseUrl=http://zipkin-server:9411
-      - rabbit.uri=amqp://guest:guest@rabbitmq:5672
-      - spring.rabbitmq.host=rabbitmq
-      - spring.zipkin.sender.type=rabbit
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://eureka-discovery:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
 
   rabbitmq:
     image: rabbitmq:3.9.13-management
@@ -60,8 +61,6 @@ services:
       - "15672:15672"
     networks:
       - currency-network
-    depends_on:
-      - eureka-discovery
 
   zipkin-server:
     image: openzipkin/zipkin:2.23
@@ -71,10 +70,10 @@ services:
     networks:
       - currency-network
     depends_on:
-      - eureka-discovery
       - rabbitmq
+    restart: always
     environment:
-      - rabbit.uri=amqp://guest:guest@rabbitmq:5672
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
 
   eureka-discovery:
     image: krishnakrmahto97/sampleprojects/eurekadiscoveryserver:0.0.1-SNAPSHOT
