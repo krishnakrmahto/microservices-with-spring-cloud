@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.sampleprojects</groupId>
 	<artifactId>currencyconversionservice</artifactId>
-	<version>0.0.11-SNAPSHOT</version>
+	<version>0.0.12-SNAPSHOT</version>
 	<name>currencyconversionservice</name>
 	<description>Sample Currency Conversion Service</description>
 	<properties>
