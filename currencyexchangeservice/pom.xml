@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.sampleprojects</groupId>
 	<artifactId>currencyexchangeservice</artifactId>
-	<version>0.0.12-SNAPSHOT</version>
+	<version>0.0.13-SNAPSHOT</version>
 	<name>currencyexchangeservice</name>
 	<description>Sample Currency Exchange Service</description>
 	<properties>
@@ -60,11 +60,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 
 	</dependencies>
