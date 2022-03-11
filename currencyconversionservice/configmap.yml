@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  CURRENCY_EXCHANGE_HOST_URI: http://currency-exchange
+kind: ConfigMap
+metadata:
+  name: currency-conversion
+  namespace: default

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.sampleprojects</groupId>
 	<artifactId>currencyconversionservice</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.14-SNAPSHOT</version>
 	<name>currencyconversionservice</name>
 	<description>Sample Currency Conversion Service</description>
 	<properties>
@@ -37,10 +37,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-config</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -49,22 +45,7 @@
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-sleuth-zipkin</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.amqp</groupId>
-			<artifactId>spring-rabbit</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 
 		<dependency>
@@ -103,7 +84,7 @@
 						</exclude>
 					</excludes>
 					<image>
-						<name>krishnakrmahto97/sampleprojects/${project.artifactId}:${project.version}</name>
+						<name>krishnakrmahto97/sampleprojects-${project.artifactId}:${project.version}</name>
 					</image>
 					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
 				</configuration>
