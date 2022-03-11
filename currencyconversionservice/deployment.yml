@@ -23,7 +23,7 @@ spec:
         app: currency-conversion
     spec:
       containers:
-        - image: krishnakrmahto97/sampleprojects-currencyconversionservice:0.0.13-SNAPSHOT
+        - image: krishnakrmahto97/sampleprojects-currencyconversionservice:0.0.14-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: sampleprojects-currencyconversionservice
 #          env:
@@ -31,5 +31,5 @@ spec:
 #              value: http://currency-exchange
           envFrom:
             - configMapRef:
-                name: currency-exchange
+                name: currency-conversion
       restartPolicy: Always
