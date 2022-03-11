@@ -8,13 +8,6 @@ metadata:
   name: currency-exchange
   namespace: default
 spec:
-  clusterIP: 10.8.1.138
-  clusterIPs:
-  - 10.8.1.138
-  externalTrafficPolicy: Cluster
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
   ports:
   - port: 8000
     protocol: TCP
