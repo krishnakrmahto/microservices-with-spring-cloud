@@ -26,4 +26,7 @@ spec:
         - image: krishnakrmahto97/sampleprojects-currencyconversionservice:0.0.13-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: sampleprojects-currencyconversionservice
+          env:
+            - name: CURRENCY_EXCHANGE_HOST_URI
+              value: http://currency-exchange
       restartPolicy: Always
