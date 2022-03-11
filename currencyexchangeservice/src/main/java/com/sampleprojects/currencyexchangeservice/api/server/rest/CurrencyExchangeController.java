@@ -28,7 +28,7 @@ public class CurrencyExchangeController {
   @Bulkhead(name = "currency-exchange-get", fallbackMethod = "bulkHeadFallback")
   public CurrencyExchangeResponse getFromToCurrencyExchange(@RequestParam String from, @RequestParam String to) {
 
-    log.info("Running on hostName: {}" + environment.getProperty("HOSTNAME"));
+    log.info("Running on hostName: {}", environment.getProperty("HOSTNAME"));
 
     return service.getFromToCurrencyExchange(from, to)
         .orElseThrow(() -> new CurrencyExchangeNotFoundException(
